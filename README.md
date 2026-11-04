@@ -1,30 +1,50 @@
 # 🌐 Web Stability Tester
 
-A lightweight, modern web application built with **Flask** and **Vanilla JavaScript** that enables users to test the real-time connectivity and uptime stability of any website URL.
+A lightweight Flask and JavaScript web application designed to monitor uptime, track response latency, and test live connection stability for web services and endpoints.
+---
+
+## 📌 Overview
+
+**Web Stability Tester** is a local and remote utility built to check target URLs or server endpoints for active uptime, packet/response round-trip times, and stability consistency over time. It provides a real-time monitoring interface backed by a lightweight Flask server.
+
+---
 
 ## ✨ Features
 
-* **Real-Time Uptime Monitoring:** Instantly checks whether a target URL is online or offline with a built-in 5-second timeout safeguard.
-* **Modern Glassmorphic UI:** Features a sleek, dark-mode dashboard styled with custom CSS variables, status badges, and smooth animations.
-* **Asynchronous Requests:** Utilizes the JavaScript `Fetch API` for non-blocking status updates and seamless user interaction.
-* **Automatic Protocol Handling:** Intelligently prepends `https://` if users omit the protocol in their input.
+* **Real-Time Latency Tracking:** Measures response times and logs live status updates.
+* **Uptime & Stability Logging:** Tracks service reliability and failure intervals.
+* **Lightweight Flask Backend:** Fast, minimal server footprint handling target requests securely.
+* **Interactive Frontend Dashboard:** Clean interface for viewing health metrics and test logs.
 
 ---
 
-## 🛠️ Tech Stack
+## 🚀 Installation & Setup
 
-* **Backend:** Python, Flask, Requests
-* **Frontend:** HTML5, CSS3, JavaScript (Fetch API)
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/web-stability-tester.git
+   cd web-stability-tester
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
 ---
 
-## 📂 Project Structure
+## 💻 Usage
 
-```text
-web-stability-tester/
-│
-├── app.py              # Main Flask application and backend routing
-├── requirements.txt    # Project dependencies
-├── README.md           # Project documentation
-└── templates/
-    └── index.html      # Frontend dashboard interface
+Start the Flask application server:
+
+```bash
+python app.py
+```
+
+Open your browser and navigate to `[http://127.0.0.1:5000](http://127.0.0.1:5000)` to access the monitoring dashboard.
+
+---
+
+## 📝 License
+
+This project is open-source and available under the [MIT License](LICENSE).
