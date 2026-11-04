@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analyseur de Stabilité Réseau</title>
+    <title>Network Stability Analyzer</title>
     <style>
         :root {
             --bg-main: #0f172a;
@@ -56,7 +56,6 @@
             margin-bottom: 1.5rem;
         }
 
-        /* Style de la barre de recherche / de saisie */
         .input-container {
             margin-bottom: 1.5rem;
         }
@@ -145,20 +144,20 @@
 <body>
 
     <div class="dashboard-card">
-        <h1>Moniteur Réseau</h1>
-        <p class="subtitle">Entrez l'URL d'un site pour tester sa connectivité</p>
+        <h1>Network Monitor</h1>
+        <p class="subtitle">Enter a website URL to test its connectivity</p>
 
         <div class="input-container">
-            <input type="text" id="url-input" placeholder="Ex: google.com ou facebook.com" value="google.com">
+            <input type="text" id="url-input" placeholder="Ex: google.com or github.com" value="google.com">
         </div>
 
         <div class="status-container">
-            <span id="display-url" class="target-url">Aucune cible</span>
-            <span id="status-badge" class="status-badge badge-idle">En attente</span>
-            <p id="status-text" class="status-text">Cliquez sur le bouton pour lancer le test.</p>
+            <span id="display-url" class="target-url">No target set</span>
+            <span id="status-badge" class="status-badge badge-idle">Idle</span>
+            <p id="status-text" class="status-text">Click the button to start the test.</p>
         </div>
 
-        <button id="btn-check" class="btn-action" onclick="checkSite()">Analyser l'adresse</button>
+        <button id="btn-check" class="btn-action" onclick="checkSite()">Analyze Address</button>
     </div>
 
     <script>
@@ -169,39 +168,36 @@
             const badge = document.getElementById('status-badge');
             const displayUrl = document.getElementById('display-url');
 
-            // Validation minimale côté client
             if (!urlInputValue) {
-                statusText.innerText = "Veuillez d'abord saisir une adresse.";
+                statusText.innerText = "Please enter an address first.";
                 badge.className = "status-badge badge-offline";
-                badge.innerText = "Erreur";
+                badge.innerText = "Error";
                 return;
             }
 
-            // Mise à jour visuelle immédiate
             displayUrl.innerText = urlInputValue;
             btn.disabled = true;
-            statusText.innerText = "Tentative de contact en cours...";
+            statusText.innerText = "Attempting to connect...";
             badge.className = "status-badge badge-loading";
-            badge.innerText = "Analyse...";
+            badge.innerText = "Analyzing...";
 
             try {
-                // Envoi de la valeur du champ de texte à l'API Flask via un paramètre de requête (?url=...)
                 const response = await fetch(`/check?url=${encodeURIComponent(urlInputValue)}`);
                 const data = await response.json();
                 
                 if (data.online) {
-                    statusText.innerText = "Connexion réussie ! Le site répond.";
+                    statusText.innerText = "Connection successful! The site is responding.";
                     badge.className = "status-badge badge-online";
-                    badge.innerText = "En Ligne";
+                    badge.innerText = "Online";
                 } else {
-                    statusText.innerText = "Impossible de joindre l'adresse (Timeout).";
+                    statusText.innerText = "Unable to reach the address (Timeout).";
                     badge.className = "status-badge badge-offline";
-                    badge.innerText = "Hors Ligne";
+                    badge.innerText = "Offline";
                 }
             } catch (error) {
-                statusText.innerText = "Erreur de communication avec le serveur local.";
+                statusText.innerText = "Communication error with the local server.";
                 badge.className = "status-badge badge-offline";
-                badge.innerText = "Erreur";
+                badge.innerText = "Error";
             } finally {
                 btn.disabled = false;
             }
