@@ -5,15 +5,12 @@ app = Flask(__name__)
 
 def check_website(url):
     try:
-        # S'assurer que l'URL commence par http:// ou https:// pour éviter les plantages
         if not url.startswith(('http://', 'https://')):
             url = 'https://' + url
             
         response = requests.get(url, timeout=5)
-        # Vérifie si le code de statut indique un succès (200 OK)
         return response.status_code == 200
     except requests.RequestException:
-        # Capture spécifiquement les erreurs réseau, de timeout ou de DNS
         return False
 
 @app.route('/')
@@ -22,7 +19,6 @@ def index():
 
 @app.route('/check')
 def check():
-    # Récupérer l'adresse soumise par l'utilisateur dans l'interface graphique
     target_url = request.args.get('url', '')
     
     if not target_url:
